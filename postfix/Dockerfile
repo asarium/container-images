@@ -1,5 +1,14 @@
 FROM docker.io/library/alpine:3
 
-RUN apk add --no-cache bash git openssh-client sshpass p7zip file
+RUN apk update && \
+    apk add --no-cache supervisor postfix rsyslog && \
+    rm -rf /var/cache/apk/* && \
+    mkdir -p /var/log/supervisor/ /var/run/supervisor/
 
-ENTRYPOINT [ "/bin/bash" ]
+COPY etc/ /etc/
+COPY run.sh /run.sh
+RUN chmod +x /run.sh
+
+EXPOSE 25
+
+CMD [ "/run.sh" ]
