@@ -13,6 +13,7 @@ function add_config_value() {
 
 add_config_value "virtual_alias_domains" ${ALIAS_DOMAINS}
 add_config_value "virtual_alias_maps" "texthash:${ALIAS_FILE}"
+add_config_value "smtp_use_tls" "yes"
 
 #Start services
 
